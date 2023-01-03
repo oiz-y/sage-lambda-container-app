@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 import {
   StartExecution,
@@ -27,15 +28,7 @@ const App = () => {
       <Grid container spacing={2}>
         {/* left space */}
         <Grid item xs={4}>
-          <Button
-            variant="contained"
-            onClick={() => DescribeExecution({
-              "executionId": executionId,
-              "setResult": setResult,
-          })}
-          >
-            Describe Execution
-          </Button>
+
         </Grid>
         {/* center space */}
         <Grid item xs={4}>
@@ -83,6 +76,14 @@ const App = () => {
                 search start
               </Button>
             </div>
+            <RefreshIcon
+              className="RefreshIcon"
+              fontSize="large"
+              onClick={() => DescribeExecution({
+                "executionId": executionId,
+                "setResult": setResult,
+              })}
+            />
             <div>
               <Typography variant="h5" className="outline">Result</Typography>
               {result}
