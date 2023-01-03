@@ -8,7 +8,6 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 import {
-  fetchLambda,
   StartExecution,
   DescribeExecution,
 } from './FetchFunctions';
@@ -20,7 +19,6 @@ const LinkToSagemath = <Link href="https://www.sagemath.org/" target="_blank" re
 const App = () => {
   const [polynomial, setPolynomial] = useState('');
   const [primeRange, setPrimeRange] = useState('');
-  const [analysisId, setAnalysisId] = useState('');
   const [executionId, setExecutionId] = useState('');
   const [result, setResult] = useState('None');
 
@@ -29,15 +27,6 @@ const App = () => {
       <Grid container spacing={2}>
         {/* left space */}
         <Grid item xs={4}>
-          <Button
-            variant="contained"
-            onClick={() => StartExecution({
-              "setExecutionId": setExecutionId,
-              "analysisId": analysisId,
-            })}
-          >
-            Start Execution
-          </Button>
           <Button
             variant="contained"
             onClick={() => DescribeExecution({
@@ -85,10 +74,10 @@ const App = () => {
             <div className="submitButton">
               <Button
                 variant="contained"
-                onClick={() => fetchLambda({
+                onClick={() => StartExecution({
                   "polynomial": polynomial,
                   "primeRange": primeRange,
-                  "setAnalysisId": setAnalysisId,
+                  "setExecutionId": setExecutionId,
                 })}
               >
                 search start

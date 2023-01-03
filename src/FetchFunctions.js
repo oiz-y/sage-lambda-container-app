@@ -1,41 +1,3 @@
-export const fetchLambda = async props => {
-  const {
-    polynomial,
-    primeRange,
-    setAnalysisId,
-  } = props;
-
-  const uuid = crypto.randomUUID();
-
-  setAnalysisId(uuid);
-
-  const requestBody = JSON.stringify({
-    'inputPolynomial': polynomial,
-    'primeRange': primeRange,
-    'analysisId': uuid,
-  });
-
-  console.log(requestBody);
-
-  const myHeaders = new Headers();
-  myHeaders.append('Content-Type', 'application/json');
-  const requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: requestBody,
-    redirect: 'follow',
-  };
-
-  await fetch('https://glcnh2cboa.execute-api.ap-northeast-1.amazonaws.com/dev', requestOptions)
-    .then(response => response.text())
-    .then(result => {
-      console.log(result);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-}
-
 export const DescribeExecution = async props => {
   const {
     executionId,
@@ -61,6 +23,7 @@ export const DescribeExecution = async props => {
       const resultObject = JSON.parse(result);
       const group = JSON.parse(resultObject.output)[0]['group'];
       setResult(group);
+      console.log({result});
     })
     .catch(error => {
       console.log(error);
@@ -69,12 +32,17 @@ export const DescribeExecution = async props => {
 
 export const StartExecution = async props => {
   const {
+    polynomial,
+    primeRange,
     setExecutionId,
-    analysisId,
   } = props;
 
+  const uuid = crypto.randomUUID();
+
   const requestBody = JSON.stringify({
-    'analysisId': analysisId,
+    'inputPolynomial': polynomial,
+    'primeRange': primeRange,
+    'analysisId': uuid,
   });
 
   const myHeaders = new Headers();
@@ -91,6 +59,7 @@ export const StartExecution = async props => {
     .then(result => {
       const executionId = JSON.parse(result).executionArn.split(':').slice(-1)[0];
       setExecutionId(executionId);
+      console.log({result});
     })
     .catch(error => {
       console.log(error);
