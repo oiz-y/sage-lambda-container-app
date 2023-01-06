@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import RefreshIcon from '@mui/icons-material/Refresh';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import {
   StartExecution,
@@ -21,29 +21,37 @@ const App = () => {
   const [polynomial, setPolynomial] = useState('');
   const [primeRange, setPrimeRange] = useState('');
   const [executionId, setExecutionId] = useState('');
-  const [result, setResult] = useState('None');
+  const [result, setResult] = useState('');
+  const [isFetching, setIsFetching] = useState(false);
+
+  useEffect(() => {
+    if (isFetching) {
+      const intervalID = setInterval(() => DescribeExecution({
+        "executionId": executionId,
+        "setResult": setResult,
+        "setIsFetching": setIsFetching,
+      }), 1000);
+      return () => clearInterval(intervalID);
+    }
+  })
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
-        {/* left space */}
+        {/* left area */}
         <Grid item xs={4}>
-
         </Grid>
-        {/* center space */}
+        {/* center area */}
         <Grid item xs={4}>
           <Paper className="paper" elevation={3}>
             <div className="appTitle">
-              <Typography variant="h4">Welcome to my app!</Typography>
+              <Typography variant="h4">Welcome!</Typography>
             </div>
-            <Typography variant="body1" className="outline">
-              This application is
-              {LinkToSagemath}
-              application.
-            </Typography>
-            <Typography variant="body1" className="outline">
-              Input irreducible polynomial.
-            </Typography>
+            <div className="outline">
+              <Typography variant="body1">
+                Input irreducible polynomial.
+              </Typography>
+            </div>
             <div className="textField">
               <div className="polynomialText">
                 <TextField
@@ -70,27 +78,23 @@ const App = () => {
                 onClick={() => StartExecution({
                   "polynomial": polynomial,
                   "primeRange": primeRange,
+                  "setResult": setResult,
                   "setExecutionId": setExecutionId,
+                  "setIsFetching": setIsFetching,
                 })}
               >
-                search start
+                search
               </Button>
             </div>
-            <RefreshIcon
-              className="RefreshIcon"
-              fontSize="large"
-              onClick={() => DescribeExecution({
-                "executionId": executionId,
-                "setResult": setResult,
-              })}
-            />
-            <div>
-              <Typography variant="h5" className="outline">Result</Typography>
+            <Typography variant="h5">
               {result}
+            </Typography>
+            <div className="progressArea">
+              {isFetching ? <CircularProgress /> : <></>}
             </div>
           </Paper>
         </Grid>
-        {/* right space */}
+        {/* right area */}
         <Grid item xs={4}>
         </Grid>
       </Grid>

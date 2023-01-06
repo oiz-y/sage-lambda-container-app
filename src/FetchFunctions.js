@@ -2,6 +2,7 @@ export const DescribeExecution = async props => {
   const {
     executionId,
     setResult,
+    setIsFetching,
   } = props;
 
   const requestBody = JSON.stringify({
@@ -10,6 +11,7 @@ export const DescribeExecution = async props => {
 
   const myHeaders = new Headers();
   myHeaders.append('Content-Type', 'application/json');
+
   const requestOptions = {
     method: 'POST',
     headers: myHeaders,
@@ -21,12 +23,15 @@ export const DescribeExecution = async props => {
     .then(response => response.text())
     .then(result => {
       const resultObject = JSON.parse(result);
-      const group = JSON.parse(resultObject.output)[0]['group'];
-      setResult(group);
-      console.log({result});
+      if (resultObject.hasOwnProperty('output')) {
+        const group = JSON.parse(resultObject.output)[0]['group'];
+        setResult(group);
+        setIsFetching(false);
+      }
     })
     .catch(error => {
-      console.log(error);
+      setIsFetching(false);
+      console.log({error});
     });
 }
 
@@ -34,8 +39,12 @@ export const StartExecution = async props => {
   const {
     polynomial,
     primeRange,
+    setResult,
     setExecutionId,
+    setIsFetching,
   } = props;
+
+  setResult('');
 
   const uuid = crypto.randomUUID();
 
@@ -47,6 +56,7 @@ export const StartExecution = async props => {
 
   const myHeaders = new Headers();
   myHeaders.append('Content-Type', 'application/json');
+
   const requestOptions = {
     method: 'POST',
     headers: myHeaders,
@@ -54,14 +64,16 @@ export const StartExecution = async props => {
     redirect: 'follow',
   };
 
+  setIsFetching(true);
+
   await fetch('https://glcnh2cboa.execute-api.ap-northeast-1.amazonaws.com/dev/start', requestOptions)
     .then(response => response.text())
     .then(result => {
       const executionId = JSON.parse(result).executionArn.split(':').slice(-1)[0];
       setExecutionId(executionId);
-      console.log({result});
     })
     .catch(error => {
-      console.log(error);
+      setIsFetching(false);
+      console.log({error});
     });
 }
