@@ -30,6 +30,7 @@ export const DescribeExecution = async props => {
       }
     })
     .catch(error => {
+      setResult('error');
       setIsFetching(false);
       console.log({error});
     });
@@ -73,6 +74,7 @@ export const StartExecution = async props => {
       setExecutionId(executionId);
     })
     .catch(error => {
+      setResult('error');
       setIsFetching(false);
       console.log({error});
     });
