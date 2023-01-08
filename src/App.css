@@ -1,38 +1,54 @@
-.App {
+body{
+  margin: 10px;
+}
+
+.paper{
+  padding: 10px;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.appTitle{
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.outline{
+  margin: 20px 0px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.textField{
+  margin: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.submitButton{
+  margin: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.polynomialText{
+  margin: 10px;
+}
+
+.primeRangeText{
+  margin: 10px;
+}
+
+.RefreshIcon {
+  color: rgb(41, 112, 243);
+  border: 1px solid;
+  border-radius: 10px;
+  /* do not work */
+  /* transition: 1.0s; */
+}
+
+.RefreshIcon:hover {
+  color: rgb(41, 112, 243);
+  cursor: pointer;
+  box-shadow: 2px 2px 4px;
+}
+
+.RefreshIcon:active {
+  color: rgb(10, 27, 255);
+  box-shadow: 0px 0px 0px;
+}
+
+.progressArea {
+  margin: 10px;
 }
