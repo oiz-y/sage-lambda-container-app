@@ -7,6 +7,7 @@ import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useMediaQuery } from 'react-responsive'
 
 import {
   StartExecution,
@@ -24,6 +25,11 @@ const App = () => {
   const [result, setResult] = useState('');
   const [isFetching, setIsFetching] = useState(false);
 
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 844px)'
+  })
+  const ControleSpace = <>{isDesktopOrLaptop ? <Grid item xs={4}></Grid> : <></>}</>;
+
   useEffect(() => {
     if (isFetching) {
       const intervalID = setInterval(() => DescribeExecution({
@@ -38,11 +44,8 @@ const App = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
-        {/* left area */}
-        <Grid item xs={4}>
-        </Grid>
-        {/* center area */}
-        <Grid item xs={4}>
+        {ControleSpace}
+        <Grid item xs={isDesktopOrLaptop ? 4 : 12}>
           <Paper className="paper" elevation={3}>
             <div className="appTitle">
               <Typography variant="h4">Welcome!</Typography>
@@ -94,9 +97,7 @@ const App = () => {
             </div>
           </Paper>
         </Grid>
-        {/* right area */}
-        <Grid item xs={4}>
-        </Grid>
+        {ControleSpace}
       </Grid>
     </Box>
   );
