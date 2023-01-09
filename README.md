@@ -6,4 +6,4 @@ This [application](https://www.galoisapp.com/) compares the decomposition type m
 1. Fill input forms:
     - In the "polynomial", enter an irreducible polynomial.
     - In the "prime range", enter a positive integer.
-2. Press the "SEARCH" button.
+2. Press the rocket button.

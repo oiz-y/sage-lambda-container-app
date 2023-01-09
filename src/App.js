@@ -3,11 +3,11 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useMediaQuery } from 'react-responsive'
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import { useMediaQuery } from 'react-responsive';
 
 import {
   StartExecution,
@@ -15,8 +15,6 @@ import {
 } from './FetchFunctions';
 
 import './App.css';
-
-const LinkToSagemath = <Link href="https://www.sagemath.org/" target="_blank" rel="noopener"> SageMath </Link>;
 
 const App = () => {
   const [polynomial, setPolynomial] = useState('');
@@ -47,14 +45,6 @@ const App = () => {
         {ControleSpace}
         <Grid item xs={isDesktopOrLaptop ? 4 : 12}>
           <Paper className="paper" elevation={3}>
-            <div className="appTitle">
-              <Typography variant="h4">Welcome!</Typography>
-            </div>
-            <div className="outline">
-              <Typography variant="body1">
-                Input irreducible polynomial.
-              </Typography>
-            </div>
             <div className="textField">
               <div className="polynomialText">
                 <TextField
@@ -69,7 +59,7 @@ const App = () => {
                 <TextField
                   id="outlined-basic"
                   className="primeRangeText"
-                  label="prime range"
+                  label="integer"
                   variant="outlined"
                   onChange={(event) => setPrimeRange(event.target.value)}
                 />
@@ -86,7 +76,7 @@ const App = () => {
                   "setIsFetching": setIsFetching,
                 })}
               >
-                search
+                <RocketLaunchIcon />
               </Button>
             </div>
             <Typography variant="h5">
