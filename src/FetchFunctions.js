@@ -12,6 +12,10 @@ export const StartExecution = async props => {
     setIsFetching,
   } = props;
 
+  if (polynomial === '' && primeRange === '') {
+    return;
+  }
+
   setResult('');
 
   const uuid = crypto.randomUUID();
