@@ -15,11 +15,11 @@ The Galois group is Alternating group $A_3 = \lbrace (1),\ (1\ 2\ 3),\ (1\ 3\ 2)
 
 ## App URL:globe_with_meridians:
 
-### https://www.galoisapp.com/
+### https://galoisapp.com/
 
 ## Related links
 
-- Backend : https://github.com/quryu-1/sage-lambda-container-backend
+- Backend : https://github.com/oiz-y/sage-lambda-container-backend
 
 ## Reference:book:
 
@@ -28,4 +28,4 @@ The Galois group is Alternating group $A_3 = \lbrace (1),\ (1\ 2\ 3),\ (1\ 3\ 2)
 
 ## License:bell:
 
-- [MIT](https://github.com/quryu-1/sagemath-lambda-container-sample/blob/main/LICENSE)
+- [MIT](https://github.com/oiz-y/sagemath-lambda-container-sample/blob/main/LICENSE)
